@@ -14,11 +14,26 @@ function ProjectCard({ project }) {
 
         <p>{project.description}</p>
 
-        <span className="tech-badge">{project.tech}</span>
+        {project.tech && (
+          <span className="tech-badge">
+            {project.tech}
+          </span>
+        )}
 
-        <button className="project-btn">
-          View Project
-        </button>
+        {project.link ? (
+          <a
+            href={project.link}
+            target="_blank"
+            rel="noreferrer"
+            className="project-btn"
+          >
+            View Project
+          </a>
+        ) : (
+          <button className="project-btn disabled" disabled>
+            No Project Link
+          </button>
+        )}
       </div>
     </div>
   );

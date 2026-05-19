@@ -8,7 +8,7 @@ import projectsData from "./data/projects";
 import "./App.css";
 
 function App() {
-  const [projects, setProjects] = useState(projectsData);
+  const [projects, setProjects] = useState(() => projectsData || []);
   const [searchTerm, setSearchTerm] = useState("");
 
   function addProject(newProject) {
@@ -16,7 +16,9 @@ function App() {
   }
 
   const filteredProjects = projects.filter((project) =>
-    project.title.toLowerCase().includes(searchTerm.toLowerCase())
+    (project.title || "")
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase())
   );
 
   return (
