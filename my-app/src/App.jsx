@@ -4,7 +4,7 @@ import Hero from "./components/Hero";
 import SearchBar from "./components/SearchBar";
 import AddProjectForm from "./components/AddProjectForm";
 import ProjectList from "./components/ProjectList";
-import projectsData from "./data/projects.js";
+import projectsData from "./data/projects";
 import "./App.css";
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("");
 
   function addProject(newProject) {
-    setProjects([...projects, newProject]);
+    setProjects((prevProjects) => [newProject, ...prevProjects]);
   }
 
   const filteredProjects = projects.filter((project) =>
@@ -20,13 +20,20 @@ function App() {
   );
 
   return (
-    <>
+    <div className="app">
       <Navbar />
+
       <Hero />
-      <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+
+      <SearchBar
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+      />
+
       <AddProjectForm addProject={addProject} />
+
       <ProjectList projects={filteredProjects} />
-    </>
+    </div>
   );
 }
 

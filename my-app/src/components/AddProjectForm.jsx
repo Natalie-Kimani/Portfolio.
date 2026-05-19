@@ -4,15 +4,19 @@ function AddProjectForm({ addProject }) {
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
   const [description, setDescription] = useState("");
+  const [tech, setTech] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
+
+    if (!title || !description || !tech) return;
 
     const newProject = {
       id: Date.now(),
       title,
       image,
-      description
+      description,
+      tech
     };
 
     addProject(newProject);
@@ -20,13 +24,14 @@ function AddProjectForm({ addProject }) {
     setTitle("");
     setImage("");
     setDescription("");
+    setTech("");
   }
 
   return (
     <section id="add" className="form-section">
       <h2>Add New Project</h2>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="project-form">
         <input
           type="text"
           placeholder="Project title"
@@ -40,6 +45,13 @@ function AddProjectForm({ addProject }) {
           placeholder="Image URL"
           value={image}
           onChange={(e) => setImage(e.target.value)}
+        />
+
+        <input
+          type="text"
+          placeholder="Technologies Used"
+          value={tech}
+          onChange={(e) => setTech(e.target.value)}
           required
         />
 
@@ -50,7 +62,9 @@ function AddProjectForm({ addProject }) {
           required
         ></textarea>
 
-        <button type="submit">Add Project</button>
+        <button type="submit">
+          Add Project
+        </button>
       </form>
     </section>
   );
